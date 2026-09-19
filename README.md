@@ -482,14 +482,14 @@ Setelah gagal mengakses FTP, Eiri melancarkan serangan brute-force terhadap form
 ## Soal 16  
 <br><img width="512" height="217" alt="image" src="https://github.com/user-attachments/assets/87238b40-b2b8-42d7-9808-7af537f5fb0e" /><br>  
 
-1. IP Address server FTP yang digunakan untuk mendownload malware
+1. IP Address server FTP yang digunakan untuk mendownload malware  
    Terdapat bagian packet mencurigakan yang menunjukkan perpindahan ke mode biner, lakukan follow stream
-3. Software banner yang dikembalikan selama koneksi
+3. Software banner yang dikembalikan selama koneksi  
    Dari follow stream diketahui banner software
-4. Kredensial yang digunakan penyerang untuk login ke FTP server
+4. Kredensial yang digunakan penyerang untuk login ke FTP server  
    Dari follow stream diketahui banner software
-5. Ukuran malware file
-   Terlihat dari follow stream setelah penyerang menirim request `SIZE`
+5. Ukuran malware file  
+   Terlihat dari follow stream setelah penyerang menirim request `SIZE`  
 
 <br><img width="1918" height="859" alt="image" src="https://github.com/user-attachments/assets/4544f125-fa44-4cb3-bf80-e9f49fdf3312" /><br>
 
