@@ -251,6 +251,7 @@ Pada soal 13, diminta untuk
    netstat -tulpn | grep 22
    ```
 **Di console mika**  
+
 6. Buat user mika_admin di komputer Mika, lalu masuk (su) menggunakan user tersebut  
    ```bash
    adduser mika_admin
