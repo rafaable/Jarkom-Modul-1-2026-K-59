@@ -1,4 +1,4 @@
-# Laporan Resmi Praktikum Komdat-Jarkom Modul 1
+<img width="512" height="296" alt="image" src="https://github.com/user-attachments/assets/5bef4405-571e-47ef-881d-11003b5084ef" /># Laporan Resmi Praktikum Komdat-Jarkom Modul 1
 
 > **Kelompok K-59**
 > * Salsabila Rafa Syafira (5027251059)
@@ -277,12 +277,14 @@ Pada soal 13, diminta untuk
    <br><img width="512" height="497" alt="image" src="https://github.com/user-attachments/assets/672a1ada-bb1b-4a97-90e9-9af4228fe3cd" /><br>
    
 **Di console knights**  
+
 9. Ubah public key  
    ```bash
    nano /etc/ssh/sshd_config
    ```
    Ubah `#PubkeyAuthentication yes` menjadi `PubkeyAuthentication yes`  
    Ubah `#PasswordAuthentication yes` menjadi `PasswordAuthentication no`
+   
 10. Mematikan servis SSH yang lama dan menyalakannya kembali supaya konfigurasi yang baru langsung diterapkan  
    ```bash
    pkill sshd
@@ -301,10 +303,11 @@ Setelah *version exchange* selesai, SSH melakukan proses Key Exchange Init untuk
 <br><img width="512" height="288" alt="image" src="https://github.com/user-attachments/assets/5faa85c1-f5d8-41be-be3e-d1dbd9223b42" /><br>
 
 **Di GNS3 desktop**  
+
 11. Klik kanan penghubung antara mika ke switch, startv capture  
 
 **Di console mika**  
-11. Keluar Knights via SSH, lalu buat sesi SSH baru agar bisa ditangkap wireshark  
+12. Keluar Knights via SSH, lalu buat sesi SSH baru agar bisa ditangkap wireshark  
    ```bash
    exit
    ssh mika_admin@10.93.3.2
@@ -331,15 +334,17 @@ Setelah gagal mengakses FTP, Eiri melancarkan serangan brute-force terhadap form
 1. IP Address penyerang yang melakukan brute force  
    Serangan terjadi pada form login berbasis website, sehingga protokol yang digunakan adalah http
    Brute force adalah upaya tebak password membabi buta, ciri khas pada wireshark adalah jika ada satu IP source yang sama yang melakukan POST login berulang ulang  
-   > Filter : http.request.method == "POST"    
-   <br><img width="1318" height="949" alt="image" src="https://github.com/user-attachments/assets/409e3ca4-90ad-4c94-a51a-756083f7186d" /><br>  
+   > Filter : http.request.method == "POST"
+   <br>
+   <img width="1318" height="949" alt="image" src="https://github.com/user-attachments/assets/409e3ca4-90ad-4c94-a51a-756083f7186d" /><br>  
 2. IP target dan port yang diserang  
    IP target adalah IP destination pada upaya HTTP POST berulang, untuk menemukan portnya bisa dengan expand salah satu packet  
    <br><img width="512" height="98" alt="image" src="https://github.com/user-attachments/assets/fabe4f94-e190-49bf-95c1-bce707a46470" /><br>  
 3. Password yang ditemukann untuk user lain_admin  
    Cari string lain_admin pada salah satu informasi expand  
    > Klik edit > find packet > dropdown packet bytes > ketik 'lain_admin'  
-   <br><img width="512" height="164" alt="image" src="https://github.com/user-attachments/assets/ff53cd79-593c-4f1f-a7cd-021723436723" /><br>  
+   <br>  
+   <img width="512" height="164" alt="image" src="https://github.com/user-attachments/assets/ff53cd79-593c-4f1f-a7cd-021723436723" /><br>  
 4. Versi software web server yang tercatat di response header  
    Expand salah satu response header HTTP, karena itu dikirim dari web dan pasti terdapat info lengkap dari web itu sendiri  
    <br><img width="512" height="218" alt="image" src="https://github.com/user-attachments/assets/481f88d4-63e7-431e-a3cd-31b6acf7788c" /><br>
@@ -497,19 +502,57 @@ Setelah gagal mengakses FTP, Eiri melancarkan serangan brute-force terhadap form
 ---
 
 ## Soal 17
-*Deskripsi dan pembahasan soal nomor 17.*
+Eiri memanfaatkan celah halaaman web alice untuk mengunduh payload berbahaya  
+<br><img width="512" height="277" alt="image" src="https://github.com/user-attachments/assets/328dc6f5-d1cc-4fce-a537-a32e11d332fa" /><br>  
+1. Domain name (Host) where the suspicious files were downloaded from
+   Cari file suspicious —> File biasanya harus didownload —> Download biasanya menggunakan HTTP GET —> HTTP GET punya header Host —> Host = domain sumber file
+   > Filter : http.request.method == "GET"  
+   <br><img width="512" height="124" alt="image" src="https://github.com/user-attachments/assets/c84d496d-718d-48bc-91c0-ef41c7ec6805" /><br>  
+   Baris pertama style.css terlihat seperti file biasa style.css
+   Baris kedua hanya halaman biasa HTTP/1.1
+   Baris ketiga suspicious dan harus di-follow stream
+   Dan kita mendapat domain host
+   <br><img width="512" height="291" alt="image" src="https://github.com/user-attachments/assets/31d48983-39e1-4aaa-b3cb-0ddea6ce9c45" /><br>
+2. IP address of the web server hosting the malicious files?
+   Waktu kirim request get buat minta file mencurigakan, tujuannya ke IP mana? Caranya dengan expand baris ketika GET /navi_agent.exe, didapat destination 203.0.113.42  
+   <br><img width="512" height="167" alt="image" src="https://github.com/user-attachments/assets/d103be0b-4ad5-4329-ab5d-6156f219aa43" /><br>
+3. Filename of the executable malware payload downloaded by the client
+   Melihat follow stream yang sama, nama file yang coba didownload adalah navi_agent.exe  
+4. What is the HTTP status response code returned when downloading navi_agent.exe?
+   Melihat follow stream yang sama, kode yang dikembalikan setelah penyerang mengirim request GET adalah 200 OK
+   <br><img width="512" height="250" alt="image" src="https://github.com/user-attachments/assets/fa73a320-c3e7-42e7-a87a-60a6c07f9608" /><br>  
 
 ---
 
 ## Soal 18
-*Deskripsi dan pembahasan soal nomor 18.*
+Eiri menanamkan file malware menggunakan protokol filesharing SMB
+1. What network file sharing protocol was used to transfer the malware to the victim?
+   <br><img width="512" height="246" alt="image" src="https://github.com/user-attachments/assets/b259eaba-9eb7-4919-b320-b404dd6e28d5" /><br>
+   Di sini yang termasuk protokol file sharing adalah SMB2
+2. Pertanyaan selanjutnya ada di sini   
+   <br> <img width="512" height="387" alt="image" src="https://github.com/user-attachments/assets/14d33875-d3f0-4408-8eaf-05c7063e1d54" /><br>  
 
 ---
 
 ## Soal 19
-*Deskripsi dan pembahasan soal nomor 19.*
+Eiri meneror jaringan dengan mengirimkan email pemerasan melalui protokol SMTP tanpa enkripsi  
+<br><img width="512" height="296" alt="image" src="https://github.com/user-attachments/assets/a7e10264-28b8-4712-a003-5a2b16c705a8" /><br>  
+<br><img width="512" height="288" alt="image" src="https://github.com/user-attachments/assets/a75c8537-8348-43f8-af73-c15c4b7a450b" /><br>  
+<br><img width="447" height="512" alt="image" src="https://github.com/user-attachments/assets/9ad59700-bfde-4668-9deb-ac43f5fdd6fd" /><br>  
+Semua informasi diperlukan sudah terlihat pada follow stream  
 
 ---
 
 ## Soal 20
-*Deskripsi dan pembahasan soal nomor 20.*
+Eiri menyembunyikan komunikasi malware di balik saluran terenkripsi TLS. Namun Alice telah menyediakan file keylog untuk mendekripsi lalu lintas data tersebut  
+<br>
+Masukkan TLS key  
+* Preferences > Protocols > TLS > Pada “(Pre)-Master-Secret log filename” pilih file “keyslogfile.txt” yang sudah diinstall & dikompress > Apply
+* Close capture lalu buka lagi: wired_tls_decrypt.pcapng
+* Kalau berhasil, paket yang tadinya `TLS Application Data` akan berubah menjadi `HTTP`
+* Lakukan follow stream pada HTTP pertama
+<br> <img width="512" height="380" alt="image" src="https://github.com/user-attachments/assets/a6d6486f-5096-4eda-8f84-6bc04778e71d" /><br>
+<br><img width="512" height="274" alt="image" src="https://github.com/user-attachments/assets/37e84d7d-7695-4d97-a14a-b12052c9b462" /><br>  
+
+
+
