@@ -1,4 +1,4 @@
-<img width="512" height="296" alt="image" src="https://github.com/user-attachments/assets/5bef4405-571e-47ef-881d-11003b5084ef" /># Laporan Resmi Praktikum Komdat-Jarkom Modul 1
+# Laporan Resmi Praktikum Komdat-Jarkom Modul 1
 
 > **Kelompok K-59**
 > * Salsabila Rafa Syafira (5027251059)
@@ -535,6 +535,8 @@ Eiri menanamkan file malware menggunakan protokol filesharing SMB
 ---
 
 ## Soal 19
+<img width="512" height="296" alt="image" src="https://github.com/user-attachments/assets/5bef4405-571e-47ef-881d-11003b5084ef" /><br>  
+
 Eiri meneror jaringan dengan mengirimkan email pemerasan melalui protokol SMTP tanpa enkripsi  
 <br><img width="512" height="296" alt="image" src="https://github.com/user-attachments/assets/a7e10264-28b8-4712-a003-5a2b16c705a8" /><br>  
 <br><img width="512" height="288" alt="image" src="https://github.com/user-attachments/assets/a75c8537-8348-43f8-af73-c15c4b7a450b" /><br>  
